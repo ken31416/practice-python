@@ -1,1 +1,3 @@
 # practice-python
+
+and github,numpy...
