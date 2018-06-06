@@ -3,10 +3,14 @@
 #breadth first search
 #幅優先探索
 
+#探索するデータはこんな構造を想定
+#field = [[0,1,2],[0,1,2],[0,1,2]]
+
 def copy(list):
     return [x for x in list]
 
-def search(field,pos,width,depth,hystory):
+#次ステップで処理すべき内容を列挙
+def bf_search(pos,width,depth,hystory):
    hystory_temp = copy(hystory)
    hystory_temp.append(pos) 
 
@@ -17,7 +21,6 @@ def search(field,pos,width,depth,hystory):
 
    return next
 
-field = [[0,1,2],[0,1,2],[0,1,2]]
 W = 3
 H = 3
 
@@ -26,17 +29,16 @@ hystory = []
 
 next = [ [i,hystory] for i in next_visit ]
 
-
 #1ループは
 #処理予定の対称を処理->次に処理する対称を集める
 #から成る
-#キューの考え方
-while(not len(next) == 0):
+
+while(not len(next) == 0):#処理すべきアイテムを詰めたキューが空なら終了
     temp = []
     for item in next:
-        print(item[1],item[0])
+        print( item[1],item[0])
         if item[0][0] < H:
-            temp.extend( search(field,item[0], W, H, item[1]) )
+            temp.extend( bf_search(item[0], W, H, item[1]) )
 
     next = temp
 
